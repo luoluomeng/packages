@@ -4,6 +4,9 @@ START=98
 USE_PROCD=1
 
 start_service() {
+	[ -d /etc/config/homebridge ] || {
+		mkdir -m 0755 -p /etc/config/homebridge
+	}
 	procd_open_instance
 	procd_set_param command /usr/bin/homebridge -U /etc/config/homebridge
 	procd_set_param user homebridge
