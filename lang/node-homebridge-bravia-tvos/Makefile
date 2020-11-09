@@ -26,7 +26,7 @@ define Package/node-homebridge-bravia-tvos
   SUBMENU:=Node.js
   SECTION:=lang
   CATEGORY:=Languages
-  TITLE:=Node.js HomeKit Server Bravia plugin
+  TITLE:=Bravia plugin for homebridge
   URL:=https://www.npmjs.org/package/homebridge-bravia-tvos
   DEPENDS:=+node +node-npm +node-homebridge
 endef
