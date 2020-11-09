@@ -61,6 +61,12 @@ endef
 
 define Package/node-homebridge-bravia-tvos/install
 	$(INSTALL_DIR) $(1)/usr/lib/node_modules/$(PKG_NPM_NAME)
+		$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{*.json,*.md} \
+		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{node_modules,lib} \
+		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{LICENSE,bin} \
+		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
 endef
 
 $(eval $(call BuildPackage,node-homebridge-bravia-tvos))
