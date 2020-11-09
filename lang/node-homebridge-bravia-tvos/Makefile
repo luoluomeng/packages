@@ -1,41 +1,38 @@
-#
-# Copyright (C) 2014 Arduino LLC
-#
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
 #
 
 include $(TOPDIR)/rules.mk
 
-PKG_NPM_NAME:=serialport
+PKG_NPM_NAME:=node-homebridge-bravia
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=9.0.1
+PKG_VERSION:=4.0.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=9f837bc5b64dde03aaf097093a2674789405f436fd367903502d3e2e17fcd4a3
+PKG_HASH:=80f1bbd2021942f4ec47d662f9ec208ca7fb7490d981cdc409f19809604cb592
 
 PKG_BUILD_DEPENDS:=node/host
 PKG_USE_MIPS16:=0
 
-PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
-PKG_LICENSE:=MIT
+PKG_MAINTAINER:=Patrick Luo
+PKG_LICENSE:=ISC Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/node-serialport
+define Package/node-homebridge-bravia-tvos
   SUBMENU:=Node.js
   SECTION:=lang
   CATEGORY:=Languages
-  TITLE:=Node.js package to access serial ports
-  URL:=https://serialport.io/
-  DEPENDS:=+node +node-npm +node-serialport-bindings
+  TITLE:=Node.js HomeKit Server Bravia plugin
+  URL:=https://www.npmjs.org/package/homebridge-bravia-tvos
+  DEPENDS:=+node +node-npm +node-homebridge
 endef
 
-define Package/node-serialport/description
- Node.js package to access serial ports for reading and writing OR Welcome your robotic JavaScript overlords. Better yet, program them!
+define Package/node-homebridge-bravia-tvos/description
+ node-homebridge-bravia-tvos is a plugin for Homebridge to control your Sony Bravia Android TV.
 endef
 
 TAR_OPTIONS+= --strip-components 1
@@ -45,6 +42,7 @@ NODEJS_CPU:=$(subst powerpc,ppc,$(subst aarch64,arm64,$(subst x86_64,x64,$(subst
 TMPNPM:=$(shell mktemp -u XXXXXXXXXX)
 
 TARGET_CFLAGS+=$(FPIC)
+TARGET_CPPFLAGS+=$(FPIC)
 
 define Build/Compile
 	$(MAKE_VARS) \
@@ -56,19 +54,13 @@ define Build/Compile
 	npm_config_prefix=$(PKG_INSTALL_DIR)/usr/ \
 	npm_config_cache=$(TMP_DIR)/npm-cache-$(TMPNPM) \
 	npm_config_tmp=$(TMP_DIR)/npm-tmp-$(TMPNPM) \
-	npm install -g --build-from-source $(PKG_BUILD_DIR)
+	npm install -g $(PKG_BUILD_DIR)
 	rm -rf $(TMP_DIR)/npm-tmp-$(TMPNPM)
 	rm -rf $(TMP_DIR)/npm-cache-$(TMPNPM)
 endef
 
-define Package/node-serialport/install
-	$(INSTALL_DIR) $(1)/usr/lib/node/$(PKG_NPM_NAME)
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{package.json,LICENSE,*.md} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/*.js \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{node_modules,lib} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
+define Package/node-homebridge-bravia/install
+	$(INSTALL_DIR) $(1)/usr/lib/node_modules/$(PKG_NPM_NAME)
 endef
 
-$(eval $(call BuildPackage,node-serialport))
+$(eval $(call BuildPackage,node-homebridge-bravia))

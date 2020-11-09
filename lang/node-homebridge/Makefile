@@ -29,7 +29,6 @@ define Package/node-homebridge
   TITLE:=Node.js HomeKit Server
   URL:=https://www.npmjs.org/package/homebridge
   DEPENDS:=+node +node-npm
-  USERID:=homebridge:homebridge
 endef
 
 define Package/node-homebridge/description
