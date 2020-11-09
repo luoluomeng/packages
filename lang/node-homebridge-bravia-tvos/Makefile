@@ -4,7 +4,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NPM_NAME:=node-homebridge-bravia
+PKG_NPM_NAME:=node-homebridge-bravia-tvos
 PKG_NAME:=node-$(PKG_NPM_NAME)
 PKG_VERSION:=4.0.2
 PKG_RELEASE:=1
@@ -59,8 +59,8 @@ define Build/Compile
 	rm -rf $(TMP_DIR)/npm-cache-$(TMPNPM)
 endef
 
-define Package/node-homebridge-bravia/install
+define Package/node-homebridge-bravia-tvos/install
 	$(INSTALL_DIR) $(1)/usr/lib/node_modules/$(PKG_NPM_NAME)
 endef
 
-$(eval $(call BuildPackage,node-homebridge-bravia))
+$(eval $(call BuildPackage,node-homebridge-bravia-tvos))
