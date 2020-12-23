@@ -64,13 +64,13 @@ endef
 define Package/node-homebridge/install
 	$(INSTALL_DIR) $(1)/usr/lib/node/$(PKG_NPM_NAME)
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{*.json,*.md} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
+		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{node_modules,lib} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
+		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{LICENSE,bin} \
-		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
+		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(LN) ../lib/node/homebridge/bin/homebridge $(1)/usr/bin/homebridge
+	$(LN) ../lib/node_modules/homebridge/bin/homebridge $(1)/usr/bin/homebridge
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/homebridge.init $(1)/etc/init.d/homebridge
 endef
