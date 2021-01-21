@@ -1,18 +1,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libupnp
-PKG_VERSION:=1.12.1
-PKG_RELEASE:=1
+PKG_VERSION:=1.14.0
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=@SF/pupnp
-PKG_HASH:=fc36642b1848fe5a81296d496291d350ecfc12b85fd0b268478ab230976d4009
+PKG_HASH:=ecb23d4291968c8a7bdd4eb16fc2250dbacc16b354345a13342d67f571d35ceb
 
 PKG_MAINTAINER:=Ted Hess <thess@kitschensync.net>
 PKG_LICENSE:=BSD-3-Clause
 PKG_LICENSE_FILES:=COPYING
 PKG_CPE_ID:=cpe:/a:libupnp_project:libupnp
 
+PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 
@@ -66,9 +67,6 @@ CONFIGURE_ARGS += \
 	--disable-open_ssl \
 	--disable-scriptsupport \
 	--disable-postwrite
-
-TARGET_CFLAGS += -flto
-TARGET_LDFLAGS += -flto
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include

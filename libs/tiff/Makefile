@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=tiff
-PKG_VERSION:=4.1.0
-PKG_RELEASE:=2
+PKG_VERSION:=4.2.0
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://download.osgeo.org/libtiff
-PKG_HASH:=5d29f32517dadb6dbcd1255ea5bbc93a2b54b94fbf83653b4d65c7d6775b8634
+PKG_HASH:=eb0484e568ead8fa23b513e9b0041df7e327f4ee2d22db5a533929dfc19633cb
 
 PKG_MAINTAINER:=Jiri Slachta <jiri@slachta.eu>
 PKG_LICENSE:=BSD-3-Clause
@@ -47,6 +47,7 @@ $(call Package/tiff/Default)
   CATEGORY:=Libraries
   TITLE+= library(c++ bindings)
   DEPENDS:=+libtiff $(CXX_DEPENDS)
+  ABI_VERSION:=5
 endef
 
 define Package/tiff-utils
