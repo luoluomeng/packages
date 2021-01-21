@@ -6,12 +6,12 @@ include $(TOPDIR)/rules.mk
 
 PKG_NPM_NAME:=homebridge
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=1.1.7
+PKG_VERSION:=1.2.4
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=1034d9adfaf4bdaf85402072a2057e5c01dc21dcdd81154a5c29f3cd8bb37de2
+PKG_HASH:=f91ab0058707a0498d97d87f45f19682065f80660fac942e0985caf9bb205f2a
 
 PKG_BUILD_DEPENDS:=node/host
 PKG_USE_MIPS16:=0
@@ -62,15 +62,15 @@ define Build/Compile
 endef
 
 define Package/node-homebridge/install
-	$(INSTALL_DIR) $(1)/usr/lib/node_modules/$(PKG_NPM_NAME)
+	$(INSTALL_DIR) $(1)/usr/lib/node/$(PKG_NPM_NAME)
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{*.json,*.md} \
-		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
+		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{node_modules,lib} \
-		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
+		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/node_modules/$(PKG_NPM_NAME)/{LICENSE,bin} \
-		$(1)/usr/lib/node_modules/$(PKG_NPM_NAME)/
+		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(LN) ../lib/node_modules/homebridge/bin/homebridge $(1)/usr/bin/homebridge
+	$(LN) ../lib/node/$(PKG_NPM_NAME)/bin/homebridge $(1)/usr/bin/homebridge
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/homebridge.init $(1)/etc/init.d/homebridge
 endef
